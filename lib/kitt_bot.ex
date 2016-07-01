@@ -1,14 +1,17 @@
 defmodule KittBot do
   use Application
+  require IEx
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    slack_token = Application.get_env(:kitt_bot, KittBot.Slack)[:token]
+    IEx.pry
+
     children = [
-      # Define workers and child supervisors to be supervised
-      # worker(KittBot.Worker, [arg1, arg2, arg3]),
+      # worker(KittBot.Slack, [slack_token, :whatever]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
